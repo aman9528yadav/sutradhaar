@@ -271,17 +271,17 @@ export function Dashboard() {
             <Link href="/help">
                 <Card className="bg-card border-none overflow-hidden h-full flex items-center">
                     <div className="relative w-1/3">
-                        <Image src="https://picsum.photos/200/200" alt="Smart Search" width={200} height={200} className="w-full h-28 object-cover" data-ai-hint="digital analytics" />
+                        <Image src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" alt="Unit Conversion Tips" width={200} height={200} className="w-full h-28 object-cover" data-ai-hint="conversion tips" />
                         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                             <PlayCircle size={32} className="text-white/80" />
                         </div>
                     </div>
                     <CardContent className="p-3 w-2/3">
-                        <h3 className="font-bold text-sm">{t('dashboard.smartSearch')}</h3>
-                        <p className="text-xs text-muted-foreground line-clamp-2 mt-1">Learn how to use the AI-powered search for instant conversions.</p>
+                        <h3 className="font-bold text-sm">Unit Conversion Tips</h3>
+                        <p className="text-xs text-muted-foreground line-clamp-2 mt-1">Master fast, accurate conversions with practical examples.</p>
                         <div className="flex items-center gap-4 text-xs text-muted-foreground mt-2">
-                            <span className="flex items-center gap-1"><ClockIcon size={14} /> 05 {t('dashboard.minutes')}</span>
-                            <span className="flex items-center gap-1"><User size={14} /> Aman</span>
+                            <span className="flex items-center gap-1"><ClockIcon size={14} /> 06 min</span>
+                            <span className="flex items-center gap-1"><User size={14} /> Team UniConvert</span>
                         </div>
                     </CardContent>
                 </Card>
@@ -289,17 +289,17 @@ export function Dashboard() {
             <Link href="/help">
                 <Card className="bg-card border-none overflow-hidden h-full flex items-center">
                      <div className="relative w-1/3">
-                        <Image src="https://picsum.photos/201/200" alt="How to use Smart Calc" width={201} height={200} className="w-full h-28 object-cover" data-ai-hint="financial calculator" />
+                        <Image src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop" alt="Notes & History Workflow" width={201} height={200} className="w-full h-28 object-cover" data-ai-hint="notes workflow" />
                          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                             <PlayCircle size={32} className="text-white/80" />
                         </div>
                     </div>
                     <CardContent className="p-3 w-2/3">
-                        <h3 className="font-bold text-sm">{t('dashboard.howToUseCalc')}</h3>
-                        <p className="text-xs text-muted-foreground line-clamp-2 mt-1">Discover the advanced functions of the scientific calculator.</p>
+                        <h3 className="font-bold text-sm">Notes & History Workflow</h3>
+                        <p className="text-xs text-muted-foreground line-clamp-2 mt-1">Organize notes and revisit past calculations efficiently.</p>
                         <div className="flex items-center gap-4 text-xs text-muted-foreground mt-2">
-                            <span className="flex items-center gap-1"><ClockIcon size={14} /> 15 {t('dashboard.minutes')}</span>
-                            <span className="flex items-center gap-1"><User size={14} /> Aman</span>
+                            <span className="flex items-center gap-1"><ClockIcon size={14} /> 08 min</span>
+                            <span className="flex items-center gap-1"><User size={14} /> Team UniConvert</span>
                         </div>
                     </CardContent>
                 </Card>
