@@ -135,36 +135,65 @@ export function Dashboard() {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto flex flex-col gap-6">
-      <header className="flex justify-between items-center sticky top-0 z-50 bg-background py-4">
-        <div>
-          <h1 className="text-2xl font-bold">{t('dashboard.greeting', { name: profile?.fullName || "Guest" })}</h1>
-          <p className="text-muted-foreground">{t('dashboard.challenge')}</p>
-        </div>
-        <div className="flex items-center gap-2">
-            {profile && <GlobalSearchDialog />}
-            {profile && <Notifications />}
-             <Button variant="ghost" size="icon" className="rounded-full" onClick={handleProfileClick}>
-                <Avatar>
+    <div className="w-full max-w-3xl mx-auto flex flex-col gap-6">
+      <header className="sticky top-0 z-50">
+        <Card className="bg-gradient-to-r from-primary/10 via-accent/10 to-secondary/10 border-none">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">{t('dashboard.greeting', { name: profile?.fullName || "Guest" })}</h1>
+                <p className="text-sm sm:text-base text-muted-foreground mt-1">{t('dashboard.challenge')}</p>
+              </div>
+              <div className="flex items-center gap-2">
+                {profile && <GlobalSearchDialog />}
+                {profile && <Notifications />}
+                <Button variant="ghost" size="icon" className="rounded-full" onClick={handleProfileClick}>
+                  <Avatar>
                     <AvatarImage src={profile?.profileImage} alt={profile?.fullName} />
                     <AvatarFallback>
-                        <User />
+                      <User />
                     </AvatarFallback>
-                </Avatar>
-              </Button>
-        </div>
+                  </Avatar>
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </header>
       
-      <div className="grid grid-cols-2 gap-4">
-        <Card className="bg-card p-4 rounded-2xl col-span-1 flex flex-col items-center justify-center text-center">
-             <CalculatorIcon className="w-8 h-8 text-accent mb-2"/>
-             <p className="text-3xl font-bold">{String(todayCalculations).padStart(2, '0')}</p>
-             <p className="text-sm text-muted-foreground mt-1">{t('dashboard.todayCalculation')}</p>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <Card className="bg-card p-4 rounded-2xl col-span-1">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs text-muted-foreground">{t('dashboard.todayCalculation')}</p>
+              <p className="text-3xl font-bold mt-1">{String(todayCalculations).padStart(2, '0')}</p>
+            </div>
+            <div className="p-2 rounded-full bg-accent/20">
+              <CalculatorIcon className="w-6 h-6 text-accent"/>
+            </div>
+          </div>
         </Card>
-         <Card className="bg-card p-4 rounded-2xl col-span-1 flex flex-col items-center justify-center text-center">
-            <StickyNote className="w-8 h-8 text-primary mb-2"/>
-            <p className="text-3xl font-bold">{String(savedNotesCount).padStart(2, '0')}</p>
-            <p className="text-sm text-muted-foreground mt-1">{t('dashboard.savedNotes')}</p>
+        <Card className="bg-card p-4 rounded-2xl col-span-1">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs text-muted-foreground">{t('dashboard.savedNotes')}</p>
+              <p className="text-3xl font-bold mt-1">{String(savedNotesCount).padStart(2, '0')}</p>
+            </div>
+            <div className="p-2 rounded-full bg-primary/15">
+              <StickyNote className="w-6 h-6 text-primary"/>
+            </div>
+          </div>
+        </Card>
+        <Card className="bg-card p-4 rounded-2xl col-span-2 sm:col-span-1">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs text-muted-foreground">Weekly Total</p>
+              <p className="text-3xl font-bold mt-1">{String(weeklyTotal).padStart(2, '0')}</p>
+            </div>
+            <div className="p-2 rounded-full bg-blue-500/15">
+              <Clock className="w-6 h-6 text-blue-500"/>
+            </div>
+          </div>
         </Card>
       </div>
 
@@ -173,31 +202,31 @@ export function Dashboard() {
             <CardTitle>Quick Access</CardTitle>
           </CardHeader>
           <CardContent className="p-4 pt-0">
-             <div className="grid grid-cols-3 gap-3 text-center">
+             <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 text-center">
                 <Link href="/converter" className="flex flex-col items-center gap-2 p-3 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors">
                     <div className="p-2 bg-primary/20 rounded-full"><Sigma className="text-primary"/></div>
-                    <p className="font-semibold text-sm">Converter</p>
+                    <p className="font-semibold text-xs sm:text-sm">Converter</p>
                 </Link>
                  <Link href="/converter?tab=Calculator" className="flex flex-col items-center gap-2 p-3 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors">
                     <div className="p-2 bg-orange-500/10 rounded-full"><CalculatorIcon className="text-orange-500"/></div>
-                    <p className="font-semibold text-sm">Calculator</p>
+                    <p className="font-semibold text-xs sm:text-sm">Calculator</p>
                 </Link>
                 <Link href="/notes" className="flex flex-col items-center gap-2 p-3 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors">
                     <div className="p-2 bg-accent/20 rounded-full"><StickyNote className="text-accent"/></div>
-                    <p className="font-semibold text-sm">{t('nav.notes')}</p>
+                    <p className="font-semibold text-xs sm:text-sm">{t('nav.notes')}</p>
                 </Link>
                 <Link href="/history" className="flex flex-col items-center gap-2 p-3 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors">
                     <div className="p-2 bg-blue-500/10 rounded-full"><Clock className="text-blue-500"/></div>
-                    <p className="font-semibold text-sm">{t('nav.history')}</p>
+                    <p className="font-semibold text-xs sm:text-sm">{t('nav.history')}</p>
                 </Link>
                 <Link href="/time" className="flex flex-col items-center gap-2 p-3 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors">
                      <div className="p-2 bg-green-500/10 rounded-full"><Hourglass className="text-green-500"/></div>
-                     <p className="font-semibold text-sm">Time Tools</p>
+                     <p className="font-semibold text-xs sm:text-sm">Time Tools</p>
                 </Link>
                 {profile && (
                  <Link href="/settings" className="flex flex-col items-center gap-2 p-3 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors">
                      <div className="p-2 bg-gray-500/10 rounded-full"><Settings className="text-gray-500"/></div>
-                     <p className="font-semibold text-sm">Settings</p>
+                     <p className="font-semibold text-xs sm:text-sm">Settings</p>
                  </Link>
                 )}
               </div>
@@ -206,28 +235,28 @@ export function Dashboard() {
 
         
         <Card className="bg-card p-4 rounded-2xl">
-            <h3 className="font-semibold mb-2 text-center">{t('dashboard.calculation')}</h3>
-             <div className="h-40">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="font-semibold">{t('dashboard.calculation')}</h3>
+              <span className="text-xs text-muted-foreground">All time: <strong>{allTimeCalculations}</strong></span>
+            </div>
+             <div className="h-48">
                 <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={weeklyCalculations} margin={{ top: 5, right: 0, left: -30, bottom: 5 }}>
+                    <BarChart data={weeklyCalculations} margin={{ top: 10, right: 8, left: -20, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                         <XAxis dataKey="name" tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }} axisLine={false} tickLine={false} />
                         <YAxis tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }} axisLine={false} tickLine={false} allowDecimals={false} />
                         <Tooltip
                             contentStyle={{
-                                backgroundColor: 'hsl(var(--background))',
+                                backgroundColor: 'hsl(var(--card))',
                                 borderColor: 'hsl(var(--border))',
                                 color: 'hsl(var(--foreground))',
                                 borderRadius: 'var(--radius)',
                             }}
-                            cursor={{ fill: 'hsla(var(--muted), 0.5)' }}
+                            cursor={{ fill: 'hsla(var(--muted), 0.4)' }}
                         />
-                        <Bar dataKey="value" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="value" fill="hsl(var(--primary))" radius={[6, 6, 0, 0]} />
                     </BarChart>
                 </ResponsiveContainer>
-            </div>
-             <div className="text-center text-sm text-muted-foreground mt-2">
-                Total calculations: <strong>{allTimeCalculations}</strong>
             </div>
         </Card>
 
@@ -238,21 +267,21 @@ export function Dashboard() {
                 {t('dashboard.seeAll')} <ArrowRight size={16} />
             </Link>
         </div>
-        <div className="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link href="/help">
                 <Card className="bg-card border-none overflow-hidden h-full flex items-center">
                     <div className="relative w-1/3">
-                        <Image src="https://picsum.photos/200/200" alt="Smart Search" width={200} height={200} className="w-full h-28 object-cover" data-ai-hint="digital analytics" />
+                        <Image src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop" alt="Unit Conversion Tips" width={200} height={200} className="w-full h-28 object-cover" data-ai-hint="conversion tips" />
                         <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                             <PlayCircle size={32} className="text-white/80" />
                         </div>
                     </div>
                     <CardContent className="p-3 w-2/3">
-                        <h3 className="font-bold text-sm">{t('dashboard.smartSearch')}</h3>
-                        <p className="text-xs text-muted-foreground line-clamp-2 mt-1">Learn how to use the AI-powered search for instant conversions.</p>
+                        <h3 className="font-bold text-sm">Unit Conversion Tips</h3>
+                        <p className="text-xs text-muted-foreground line-clamp-2 mt-1">Master fast, accurate conversions with practical examples.</p>
                         <div className="flex items-center gap-4 text-xs text-muted-foreground mt-2">
-                            <span className="flex items-center gap-1"><ClockIcon size={14} /> 05 {t('dashboard.minutes')}</span>
-                            <span className="flex items-center gap-1"><User size={14} /> Aman</span>
+                            <span className="flex items-center gap-1"><ClockIcon size={14} /> 06 min</span>
+                            <span className="flex items-center gap-1"><User size={14} /> Team UniConvert</span>
                         </div>
                     </CardContent>
                 </Card>
@@ -260,17 +289,17 @@ export function Dashboard() {
             <Link href="/help">
                 <Card className="bg-card border-none overflow-hidden h-full flex items-center">
                      <div className="relative w-1/3">
-                        <Image src="https://picsum.photos/201/200" alt="How to use Smart Calc" width={201} height={200} className="w-full h-28 object-cover" data-ai-hint="financial calculator" />
+                        <Image src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop" alt="Notes & History Workflow" width={201} height={200} className="w-full h-28 object-cover" data-ai-hint="notes workflow" />
                          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                             <PlayCircle size={32} className="text-white/80" />
                         </div>
                     </div>
                     <CardContent className="p-3 w-2/3">
-                        <h3 className="font-bold text-sm">{t('dashboard.howToUseCalc')}</h3>
-                        <p className="text-xs text-muted-foreground line-clamp-2 mt-1">Discover the advanced functions of the scientific calculator.</p>
+                        <h3 className="font-bold text-sm">Notes & History Workflow</h3>
+                        <p className="text-xs text-muted-foreground line-clamp-2 mt-1">Organize notes and revisit past calculations efficiently.</p>
                         <div className="flex items-center gap-4 text-xs text-muted-foreground mt-2">
-                            <span className="flex items-center gap-1"><ClockIcon size={14} /> 15 {t('dashboard.minutes')}</span>
-                            <span className="flex items-center gap-1"><User size={14} /> Aman</span>
+                            <span className="flex items-center gap-1"><ClockIcon size={14} /> 08 min</span>
+                            <span className="flex items-center gap-1"><User size={14} /> Team UniConvert</span>
                         </div>
                     </CardContent>
                 </Card>
