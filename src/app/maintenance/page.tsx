@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { format, intervalToDuration, differenceInDays } from "date-fns";
+import { format, intervalToDuration, differenceInDays, Duration } from "date-fns";
 import { listenToUpdateInfo, UpdateInfo } from '@/services/firestore';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
