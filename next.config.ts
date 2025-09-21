@@ -53,9 +53,6 @@ const withPWA = require('@ducanh2912/next-pwa').default({
 
 const nextConfig: NextConfig = {
   /* config options here */
-  experimental: {
-    allowedDevOrigins: ["*.cloudworkstations.dev"],
-  },
   typescript: {
     ignoreBuildErrors: true,
   },

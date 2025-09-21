@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { LanguageProvider, useLanguage } from '@/context/language-context';
 import { ThemeProvider, useTheme } from '@/context/theme-context';
 import React, { useEffect, useState } from 'react';
-import { usePathname, useRouter, AppRouterInstance } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { listenToGlobalMaintenanceMode, UserData, listenToUserData, listenToAboutInfoFromRtdb, AppInfo, updateUserData, listenToUpdateInfo } from '@/services/firestore';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
@@ -69,8 +69,22 @@ function MaintenanceRedirect({ children }: { children: React.ReactNode }) {
     return <>{children}</>;
 }
 
+interface NavLink {
+    href: string;
+    label: string;
+    icon: React.ElementType;
+    comingSoon?: boolean;
+    description?: string;
+    isExternal?: boolean;
+    requiresAuth?: boolean;
+}
 
-const navSections = [
+interface NavSection {
+    title: string;
+    links: NavLink[];
+}
+
+const navSections: NavSection[] = [
     { 
         title: "📊 Productivity", 
         links: [
