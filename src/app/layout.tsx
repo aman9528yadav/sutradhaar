@@ -1,30 +1,30 @@
 
-"use client"
 
-import './globals.css';
+import \'./globals.css\';
 import { Toaster } from "@/components/ui/toaster"
-import { LanguageProvider, useLanguage } from '@/context/language-context';
-import { ThemeProvider, useTheme } from '@/context/theme-context';
-import React, { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import { listenToGlobalMaintenanceMode, UserData, listenToUserData, listenToAboutInfoFromRtdb, AppInfo, updateUserData, listenToUpdateInfo } from '@/services/firestore';
-import { Skeleton } from '@/components/ui/skeleton';
-import { cn } from '@/lib/utils';
-import { SidebarProvider, Sidebar, SidebarClose, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger } from '@/components/ui/sidebar';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { Home, Sigma, Calculator, NotebookPen, History, Timer, Settings, HelpCircle, X, User, Info, Newspaper, Rocket, Palette, Languages, Hourglass, Calendar, Mail, Crown, Sparkles, LogIn, LogOut } from 'lucide-react';
-import { Logo } from '@/components/logo';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { motion, AnimatePresence } from 'framer-motion';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Header } from '@/components/header';
-import { auth } from '@/lib/firebase';
-import * as LucideIcons from 'lucide-react';
+import { LanguageProvider, useLanguage } from \'@/context/language-context\';
+import { ThemeProvider, useTheme } from \'@/context/theme-context\';
+import React, { useEffect, useState } from \'react\';
+import { usePathname, useRouter } from \'next/navigation\';
+import { listenToGlobalMaintenanceMode, UserData, listenToUserData, listenToAboutInfoFromRtdb, AppInfo, updateUserData, listenToUpdateInfo } from \'@/services/firestore\';
+import { Skeleton } from \'@/components/ui/skeleton\';
+import { cn } from \'@/lib/utils\';
+import { SidebarProvider, Sidebar, SidebarClose, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger } from \'@/components/ui/sidebar\';
+import { Button } from \'@/components/ui/button\';
+import Link from \'next/link\';
+import { Home, Sigma, Calculator, NotebookPen, History, Timer, Settings, HelpCircle, X, User, Info, Newspaper, Rocket, Palette, Languages, Hourglass, Calendar, Mail, Crown, Sparkles, LogIn, LogOut } from \'lucide-react\';
+import { Logo } from \'@/components/logo\';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from \'@/components/ui/select\';
+import { motion, AnimatePresence } from \'framer-motion\';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from \'@/components/ui/alert-dialog\';
+import { Avatar, AvatarImage, AvatarFallback } from \'@/components/ui/avatar\';
+import { Header } from \'@/components/header\';
+import { auth } from \'@/lib/firebase\';
+import * as LucideIcons from \'lucide-react\';
 
 
 function MaintenanceRedirect({ children }: { children: React.ReactNode }) {
+    "use client"
     const [isMaintenanceMode, setIsMaintenanceMode] = useState<boolean | null>(null);
     const pathname = usePathname();
     const router = useRouter();
@@ -37,12 +37,12 @@ function MaintenanceRedirect({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         if (isMaintenanceMode === null) return;
         
-        if (isMaintenanceMode && !pathname.startsWith('/dev') && pathname !== '/maintenance') {
-            router.replace('/maintenance');
+        if (isMaintenanceMode && !pathname.startsWith(\'/dev\') && pathname !== \'/maintenance\') {
+            router.replace(\'/maintenance\');
         }
 
-        if (!isMaintenanceMode && pathname === '/maintenance') {
-            router.replace('/');
+        if (!isMaintenanceMode && pathname === \'/maintenance\') {
+            router.replace(\'/\');
         }
     }, [isMaintenanceMode, pathname, router]);
 
@@ -57,12 +57,12 @@ function MaintenanceRedirect({ children }: { children: React.ReactNode }) {
     }
     
     // Allow dev routes to render regardless of maintenance mode
-    if (pathname.startsWith('/dev')) {
+    if (pathname.startsWith(\'/dev\')) {
         return <>{children}</>;
     }
     
     // If in maintenance, and not on the maintenance page yet, we are redirecting, so render nothing.
-    if (isMaintenanceMode && pathname !== '/maintenance') {
+    if (isMaintenanceMode && pathname !== \'/maintenance\') {
         return null;
     }
 
@@ -140,6 +140,7 @@ function PageSkeleton() {
 
 
 function RootLayoutContent({ children }: { children: React.ReactNode }) {
+  "use client"
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useLanguage();
@@ -153,7 +154,7 @@ function RootLayoutContent({ children }: { children: React.ReactNode }) {
 
 
   // Pages where the main header should be hidden
-  const noHeaderPages = ['/welcome', '/signup', '/forgot-password', '/logout', '/getting-started', '/maintenance'];
+  const noHeaderPages = [\'/welcome\', \'/signup\', \'/forgot-password\', \'/logout\', \'/getting-started\', \'/maintenance\'];
   const showHeader = !noHeaderPages.includes(pathname);
   
   useEffect(() => {
@@ -191,7 +192,7 @@ function RootLayoutContent({ children }: { children: React.ReactNode }) {
         e.preventDefault();
         setComingSoonFeature({
             title: link.label,
-            description: link.description || "This feature is under development. We'll notify you when it's ready!",
+            description: link.description || "This feature is under development. We\'ll notify you when it\'s ready!",
             icon: link.icon
         });
         setShowComingSoonDialog(true);
@@ -207,7 +208,7 @@ function RootLayoutContent({ children }: { children: React.ReactNode }) {
     });
   }
   
-  const displayName = profile?.email === 'amanyadavyadav9458@gmail.com' ? 'Aman jii' : profile?.fullName || 'Guest';
+  const displayName = profile?.email === \'amanyadavyadav9458@gmail.com\' ? \'Aman jii\' : profile?.fullName || \'Guest\';
 
 
   return (
@@ -215,16 +216,16 @@ function RootLayoutContent({ children }: { children: React.ReactNode }) {
       <head>
           <title>Sutradhaar</title>
           <meta name="description" content="A straightforward unit converter app for various measurements." />
-          <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%237C3AED' /><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='70' fill='white' font-family='sans-serif'>S</text></svg>" />
+          <link rel="icon" href="data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' rx=\'20\' fill=\'%237C3AED\' /><text x=\'50%\' y=\'50%\' dominant-baseline=\'central\' text-anchor=\'middle\' font-size=\'70\' fill=\'white\' font-family=\'sans-serif\'>S</text></svg>" />
           <meta name="manifest" content="/manifest.json" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
           <link rel="apple-touch-icon" href="/icon-192x192.png" />
       </head>
-      <body className={cn("font-body antialiased", theme === 'sutradhaar' && 'sutradhaar-body')} suppressHydrationWarning>
+      <body className={cn("font-body antialiased", theme === \'sutradhaar\' && \'sutradhaar-body\')} suppressHydrationWarning>
           <MaintenanceRedirect>
-            {pathname === '/maintenance' ? (
+            {pathname === \'/maintenance\' ? (
                  <AnimatePresence mode="wait">
                     <motion.div
                         key={pathname}
@@ -270,16 +271,16 @@ function RootLayoutContent({ children }: { children: React.ReactNode }) {
 
                             <div className="flex items-center gap-4 mb-8 mt-10 p-3 bg-card/70 dark:bg-card/70 rounded-2xl shadow-md">
                                 <Avatar className="w-14 h-14 bg-gradient-to-r from-primary to-accent shadow-lg">
-                                    <AvatarImage src={profile?.profileImage || ''} />
-                                    <AvatarFallback className="text-white font-bold text-lg bg-transparent">{profile?.fullName?.[0] || 'G'}</AvatarFallback>
+                                    <AvatarImage src={profile?.profileImage || \'\'} />
+                                    <AvatarFallback className="text-white font-bold text-lg bg-transparent">{profile?.fullName?.[0] || \'G\'}</AvatarFallback>
                                 </Avatar>
                                 <div>
                                     <p className="text-xs text-muted-foreground">Welcome back,</p>
                                     <p className="text-lg font-semibold text-foreground">{displayName}</p>
                                     {isLoggedIn ? (
-                                        <button onClick={() => router.push('/profile')} className="text-xs text-primary hover:underline">View Profile</button>
+                                        <button onClick={() => router.push(\'/profile\')} className="text-xs text-primary hover:underline">View Profile</button>
                                     ): (
-                                        <button onClick={() => router.push('/welcome')} className="text-xs text-primary hover:underline">Login</button>
+                                        <button onClick={() => router.push(\'/welcome\')} className="text-xs text-primary hover:underline">Login</button>
                                     )}
                                 </div>
                             </div>
@@ -324,10 +325,10 @@ function RootLayoutContent({ children }: { children: React.ReactNode }) {
                                         <LogOut size={16} /> Logout
                                     </button>
                                 ) : (
-                                     <button onClick={() => router.push('/welcome')} className="flex items-center gap-1 text-primary text-sm hover:underline">
+                                     <button onClick={() => router.push(\'/welcome\')} className="flex items-center gap-1 text-primary text-sm hover:underline">
                                         <LogIn size={16} /> Login
                                     </button>
-                                )}
+                                )}\
                                 </div>
                             </div>
                         </SidebarContent>
@@ -339,19 +340,19 @@ function RootLayoutContent({ children }: { children: React.ReactNode }) {
           <AlertDialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
             <AlertDialogContent>
               <AlertDialogHeader className="items-center text-center">
-                <div className="p-3 bg-primary/10 rounded-full mb-4 w-fit">
+                <div className="p-3 bg-primary/10 rounded--full mb-4 w-fit">
                   <Sparkles className="w-8 h-8 text-primary" />
                 </div>
-                <AlertDialogTitle className="text-2xl">{t('dashboard.unlockProfile.title')}</AlertDialogTitle>
+                <AlertDialogTitle className="text-2xl">{t(\'dashboard.unlockProfile.title\')}</AlertDialogTitle>
                 <AlertDialogDescription className="max-w-xs">
-                  {t('dashboard.unlockProfile.description')}
+                  {t(\'dashboard.unlockProfile.description\')}
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter className="flex-col-reverse sm:flex-col-reverse gap-2">
-                <AlertDialogCancel>{t('dashboard.unlockProfile.cancel')}</AlertDialogCancel>
-                <AlertDialogAction onClick={() => router.push('/welcome')} className="bg-primary hover:bg-primary/90">
+                <AlertDialogCancel>{t(\'dashboard.unlockProfile.cancel\')}</AlertDialogCancel>
+                <AlertDialogAction onClick={() => router.push(\'/welcome\')} className="bg-primary hover:bg-primary/90">
                   <LogIn className="mr-2"/>
-                  {t('dashboard.unlockProfile.confirm')}
+                  {t(\'dashboard.unlockProfile.confirm\')}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
